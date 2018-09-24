@@ -1,0 +1,134 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+@*<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>Get Motor Insurance Quote</h2>
+        <div class='quote'>
+
+            <form action='#'>
+                <div class="form-group">
+                    <label for="startdate">1. Enter the Start Date of the Policy</label>
+                    <input class="form-control" type="date" data-bind='textInput: startDateOfPolicy, valueUpdate :"afterkeydown"' id="startdate" aria-describedby="dateHelp" placeholder="Enter Start Date of Policy">
+                    <small id="dateHelp" class="form-text text-muted">Enter Start Date of Policy (must be a date in the future..)</small>
+                </div>
+                <div class="form-group">
+                    <label>2. Add Drivers (maximum five)</label>
+                    <p>You have added <span data-bind='text: drivers().length'>&nbsp;</span> drivers(s) <span class="message" data-bind='text: generalMessage'>&nbsp;</span></p>
+                    <table data-bind='visible: drivers().length > 0' class="table table-bordered table-responsive table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Driver Name</th>
+                                <th>Occupation</th>
+                                <th>Date of Birth</th>
+
+                                <th />
+                                <th>Conviction</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind='foreach: drivers'>
+                            <tr>
+                                <td><input class='required' data-bind='value: name, valueUpdate : "afterkeydown"' /></td>
+                                <td><select class="span8 dropdown" data-placeholder="Select Occupation" data-bind="options: $parent.omnivoreTables, optionsText: 'name', optionsValue:'id', value: occupation"></select></td>
+                                <td><input class='required date' data-bind='value: dateOfBirth, valueUpdate : "afterkeydown"' /></td>
+
+                                <td><a href='#' data-bind='click: $root.removeDriver'>Remove Driver</a></td>
+                                <td data-bind="foreach: conviction">
+                                    <p data-bind="text: $data,"></p><a href='#' data-bind='click: $root.removeConviction'>X</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button data-bind='click: addDriver'>Add Driver</button>
+                <button data-bind='enable: drivers().length > 0' type='submit'>Submit</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>*@
+<div class="row">
+    <div class="col-md-12">
+        <div class="quote row">
+            <div class="col-md-12">
+                <h2>Get Motor Insurance Quote</h2>
+                <div class="form-group">
+                    RESULT : <span data-bind="text: policyResult"></span><hr />
+                    <label for="startdate">1. Enter the Start Date of the Policy</label>
+                    <input class="form-control" type="date" data-bind='textInput: startDateOfPolicy, valueUpdate :"afterkeydown"' id="startdate" aria-describedby="dateHelp" placeholder="Enter Start Date of Policy">
+                    <small id="dateHelp" class="form-text text-muted">Enter Start Date of Policy (must be today or a date in the future..)</small>
+                </div>
+                <p>You have added <span data-bind='text: drivers().length'>&nbsp;</span> drivers(s) <span class="message" data-bind='text: generalMessage'>&nbsp;</span></p>
+                <p> <button class="btn btn-primary col-md-2" data-bind='click: $root.addDriver'>Add Driver</button></p>
+            </div>
+        </div>
+        <div id="driverList">
+
+            <table class="table-bordered table-responsive">
+                <tr>
+                    <th width="600px">Driver</th>
+                    <th width="200px">Claims</th>
+                </tr>
+                <tbody data-bind="foreach: drivers">
+                    <tr class="well">
+                        <td valign="top" class="form-inline col-sm-12" width="75%">
+                            <div class="form-group">
+                                <label for="driverName">Name</label>
+                                <input type="text" class="form-control" id="driverName" data-bind='value: name, valueUpdate : "afterkeydown"' placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="driverDob">DOB</label>
+                                <input type="date" class="form-control" id="driverDob" data-bind='value: dob,valueUpdate : "afterkeydown"' placeholder="Date of Birth">
+                            </div>
+                            <div class="form-group">
+                                <label for="driverOccupation">Occupation</label><select class="form-control" data-placeholder="Select Occupation" data-bind="options: $parent.occupations, optionsText: 'name', optionsValue:'id', value: occupation"></select>
+
+                            </div> <div class="form-group">
+                                <button class="btn btn-danger" data-bind='click: $root.removeDriver'>Remove</button>
+
+                            </div>
+
+
+                        </td>
+
+                        <td width="25%">
+                            <table>
+                                <tr>claims?</tr>
+                                <tbody data-bind="foreach: claims">
+                                    <tr>
+                                        <td class="form-inline">
+                                            <div class="form-group">
+                                                <input type="date" data-bind='value: claimdate' />
+                                            </div><div class="form-group">
+                                                <button class="btn btn-danger" data-bind='click: $parent.removeClaim'>X Claim</button>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn btn-success" data-bind='click: addClaim'>Add Claim</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+
+
+            <button class="btn btn-success col-md-4" data-bind='click: save, enable: drivers().length > 0'>Submit Claim</button>
+        </p>
+
+        @*
+    </div><pre data-bind="text: ko.toJSON($data, null, 2)"></pre>*@
+</div>
+<script type="text/javascript">
+
+
+</script>
